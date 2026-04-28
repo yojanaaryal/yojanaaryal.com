@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yojana Aryal — Business Analytics</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f1117;
+      --surface: #181c27;
+      --surface2: #1e2333;
+      --border: #2a2f45;
+      --accent: #6c8eff;
+      --accent2: #a78bfa;
+      --text: #e2e8f0;
+      --muted: #8892a4;
+      --white: #ffffff;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2.5rem;
+      background: rgba(15, 17, 23, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 6rem 2.5rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-glow {
+      position: absolute;
+      top: -10rem; right: -10rem;
+      width: 40rem; height: 40rem;
+      background: radial-gradient(circle, rgba(108,142,255,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: rgba(108,142,255,0.15);
+      color: var(--accent);
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.4rem 1rem;
+      border-radius: 999px;
+      border: 1px solid rgba(108,142,255,0.3);
+      margin-bottom: 1.5rem;
+    }
+
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-name span {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-tagline {
+      font-size: 1.15rem;
+      color: var(--muted);
+      max-width: 560px;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.75rem;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      color: var(--white);
+    }
+
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-1px); }
+
+    .hero-meta {
+      margin-top: 3.5rem;
+      display: flex;
+      gap: 2.5rem;
+      flex-wrap: wrap;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--muted);
+      font-size: 0.875rem;
+    }
+
+    .meta-item svg { color: var(--accent); flex-shrink: 0; }
+
+    /* ── SECTION COMMONS ── */
+    section { padding: 5rem 2.5rem; }
+
+    .container { max-width: 900px; margin: 0 auto; }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      color: var(--white);
+      margin-bottom: 3rem;
+    }
+
+    /* ── ABOUT ── */
+    #about { background: var(--surface); }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .about-text { color: var(--muted); font-size: 1rem; }
+    .about-text p + p { margin-top: 1rem; }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    .stat-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-size: 2rem;
+      font-weight: 700;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 0.35rem;
+    }
+
+    .stat-label { font-size: 0.8rem; color: var(--muted); }
+
+    /* ── EXPERIENCE ── */
+    #experience { background: var(--bg); }
+
+    .timeline { position: relative; padding-left: 2rem; }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0.5rem; bottom: 0;
+      width: 2px;
+      background: linear-gradient(to bottom, var(--accent), var(--accent2), transparent);
+    }
+
+    .timeline-item {
+      position: relative;
+      margin-bottom: 3rem;
+    }
+
+    .timeline-item::before {
+      content: '';
+      position: absolute;
+      left: -2.45rem;
+      top: 0.5rem;
+      width: 0.9rem;
+      height: 0.9rem;
+      border-radius: 50%;
+      background: var(--accent);
+      border: 2px solid var(--bg);
+      box-shadow: 0 0 0 3px rgba(108,142,255,0.25);
+    }
+
+    .tl-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .tl-company { font-size: 1.05rem; font-weight: 600; color: var(--white); }
+
+    .tl-period {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--accent);
+      background: rgba(108,142,255,0.12);
+      padding: 0.2rem 0.75rem;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .tl-role { font-size: 0.9rem; color: var(--accent2); margin-bottom: 0.15rem; font-style: italic; }
+    .tl-location { font-size: 0.8rem; color: var(--muted); margin-bottom: 0.85rem; }
+
+    .tl-bullets { list-style: none; }
+
+    .tl-bullets li {
+      position: relative;
+      padding-left: 1.25rem;
+      color: var(--muted);
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .tl-bullets li::before {
+      content: '▹';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+    }
+
+    /* ── PROJECTS ── */
+    #projects { background: var(--surface); }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .project-card {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.75rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .project-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+
+    .project-icon {
+      width: 2.75rem;
+      height: 2.75rem;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .icon-blue { background: rgba(108,142,255,0.15); }
+    .icon-purple { background: rgba(167,139,250,0.15); }
+
+    .project-type {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .project-name {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--white);
+      margin-bottom: 0.75rem;
+    }
+
+    .project-desc { font-size: 0.875rem; color: var(--muted); margin-bottom: 1.25rem; }
+
+    .project-tags { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+
+    .tag {
+      font-size: 0.75rem;
+      font-weight: 500;
+      padding: 0.25rem 0.75rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid var(--border);
+      color: var(--muted);
+    }
+
+    /* ── EDUCATION ── */
+    #education { background: var(--bg); }
+
+    .edu-grid { display: grid; gap: 1.25rem; }
+
+    .edu-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      transition: border-color 0.2s;
+    }
+
+    .edu-card:hover { border-color: var(--accent); }
+
+    .edu-school { font-size: 1.05rem; font-weight: 600; color: var(--white); margin-bottom: 0.2rem; }
+    .edu-degree { font-size: 0.9rem; color: var(--accent2); font-style: italic; margin-bottom: 0.5rem; }
+    .edu-detail { font-size: 0.85rem; color: var(--muted); }
+
+    .edu-right { text-align: right; flex-shrink: 0; }
+
+    .edu-period {
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--accent);
+      background: rgba(108,142,255,0.12);
+      padding: 0.2rem 0.75rem;
+      border-radius: 999px;
+      margin-bottom: 0.5rem;
+      display: inline-block;
+    }
+
+    .edu-location { font-size: 0.8rem; color: var(--muted); }
+
+    /* ── SKILLS ── */
+    #skills { background: var(--surface); }
+
+    .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.5rem; }
+
+    .skill-group {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.5rem;
+    }
+
+    .skill-group-title {
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .skill-pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+
+    .skill-pill {
+      font-size: 0.8rem;
+      font-weight: 500;
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border);
+      color: var(--text);
+      transition: all 0.2s;
+    }
+
+    .skill-pill:hover { background: rgba(108,142,255,0.15); border-color: var(--accent); color: var(--accent); }
+
+    /* ── CERTS ── */
+    #certs { background: var(--bg); }
+
+    .certs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; }
+
+    .cert-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      display: flex;
+      gap: 1rem;
+      align-items: center;
+      transition: border-color 0.2s;
+    }
+
+    .cert-card:hover { border-color: var(--accent); }
+
+    .cert-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .cert-name { font-size: 0.875rem; font-weight: 500; color: var(--text); margin-bottom: 0.15rem; }
+    .cert-issuer { font-size: 0.775rem; color: var(--muted); }
+
+    /* ── CONTACT ── */
+    #contact { background: var(--surface); }
+
+    .contact-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .contact-tagline {
+      font-size: 1rem;
+      color: var(--muted);
+      max-width: 480px;
+      margin-bottom: 2.5rem;
+    }
+
+    .contact-links {
+      display: flex;
+      gap: 1.25rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .contact-link {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.85rem 1.5rem;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      color: var(--text);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .contact-link:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.8rem;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 700px) {
+      nav { padding: 1rem 1.25rem; }
+      .nav-links { gap: 1.25rem; }
+      section { padding: 4rem 1.25rem; }
+      #hero { padding: 6rem 1.25rem 3rem; }
+      .about-grid { grid-template-columns: 1fr; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .edu-card { flex-direction: column; }
+      .edu-right { text-align: left; }
+      .hero-meta { gap: 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">YA</span>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-inner">
+    <div class="hero-tag">Open to Opportunities</div>
+    <h1 class="hero-name">
+      Yojana<br /><span>Aryal</span>
+    </h1>
+    <p class="hero-tagline">
+      Business Analytics graduate student who turns raw data into clear decisions —
+      through dashboards, pipelines, and a good A/B test.
+    </p>
+    <div class="hero-btns">
+      <a href="#projects" class="btn btn-primary">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 1-2-2V9m0 0h18"/></svg>
+        View Projects
+      </a>
+      <a href="mailto:yxaryal@shockers.wichita.edu" class="btn btn-outline">
+        <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Get in Touch
+      </a>
+    </div>
+    <div class="hero-meta">
+      <div class="meta-item">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        Wichita, KS, USA
+      </div>
+      <div class="meta-item">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        MS Business Analytics @ WSU
+      </div>
+      <div class="meta-item">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Available for internships &amp; full-time
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <p class="section-label">About Me</p>
+    <h2 class="section-title">Turning Data Into Direction</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>
+          I'm a detail-oriented Business Analytics graduate student at Wichita State University with
+          hands-on professional experience building data pipelines, interactive dashboards, and
+          experimentation frameworks.
+        </p>
+        <p>
+          At Intellisoft Nepal, I owned the end-to-end analytics workflow — from automating data
+          extraction with Python &amp; SQL to designing Tableau dashboards used by product and
+          management teams every day.
+        </p>
+        <p>
+          I believe good analysis isn't just about the numbers; it's about making the insight
+          impossible to ignore. I'm actively seeking roles where I can apply these skills to
+          real business problems.
+        </p>
+      </div>
+      <div class="about-stats">
+        <div class="stat-card">
+          <div class="stat-num">2+</div>
+          <div class="stat-label">Years Industry Experience</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">15%+</div>
+          <div class="stat-label">Customer Visit Lift (A/B)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">3.87</div>
+          <div class="stat-label">Undergraduate CGPA</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num">4</div>
+          <div class="stat-label">Professional Certificates</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <p class="section-label">Work History</p>
+    <h2 class="section-title">Experience</h2>
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="tl-header">
+          <span class="tl-company">Intellisoft Nepal Pvt. Ltd.</span>
+          <span class="tl-period">Aug 2023 – Dec 2025</span>
+        </div>
+        <div class="tl-role">Business Analyst</div>
+        <div class="tl-location">Kathmandu, Nepal</div>
+        <ul class="tl-bullets">
+          <li>Created and managed interactive sales dashboards in Tableau to track key metrics and customer behavior, enabling data-driven decisions across product and management teams.</li>
+          <li>Built data pipelines using Python and SQL to automate data extraction, cleaning, and reporting.</li>
+          <li>Spearheaded an A/B testing framework to evaluate product features, resulting in a 15%+ increase in customer visits.</li>
+          <li>Conducted detailed competitor analysis to identify market gaps and trends, delivering actionable insights that shaped product requirements and strategic planning.</li>
+        </ul>
+      </div>
+
+      <div class="timeline-item">
+        <div class="tl-header">
+          <span class="tl-company">Maansu Education Pvt. Ltd.</span>
+          <span class="tl-period">Jun 2024 – Mar 2025</span>
+        </div>
+        <div class="tl-role">IELTS Instructor &amp; Receptionist (Part-Time)</div>
+        <div class="tl-location">Kathmandu, Nepal</div>
+        <ul class="tl-bullets">
+          <li>Helped students pass their IELTS exam through regular mock tests and detailed feedback to track progress.</li>
+          <li>Counseled students on U.S. education opportunities, including university selection, applications, and visa documentation.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="container">
+    <p class="section-label">Work Samples</p>
+    <h2 class="section-title">Projects</h2>
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <div class="project-icon icon-blue">📊</div>
+        <div class="project-type">Tableau · Data Visualization</div>
+        <div class="project-name">Sales Data Dashboard</div>
+        <p class="project-desc">
+          Designed a comprehensive Tableau dashboard visualizing product performance, customer
+          demographics, and purchasing patterns — giving stakeholders an at-a-glance view of
+          business health.
+        </p>
+        <div class="project-tags">
+          <span class="tag">Tableau</span>
+          <span class="tag">Data Viz</span>
+          <span class="tag">KPI Tracking</span>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <div class="project-icon icon-purple">🎬</div>
+        <div class="project-type">Machine Learning · Backend</div>
+        <div class="project-name">Movie Recommendation System</div>
+        <p class="project-desc">
+          Built a content-based movie recommendation engine using k-means clustering. Exposed
+          the model through REST APIs built with Python Flask, integrating movie metadata from
+          the TMDB API.
+        </p>
+        <div class="project-tags">
+          <span class="tag">Python</span>
+          <span class="tag">Flask</span>
+          <span class="tag">k-Means</span>
+          <span class="tag">REST API</span>
+          <span class="tag">TMDB API</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+  <div class="container">
+    <p class="section-label">Academic Background</p>
+    <h2 class="section-title">Education</h2>
+    <div class="edu-grid">
+
+      <div class="edu-card">
+        <div>
+          <div class="edu-school">Wichita State University</div>
+          <div class="edu-degree">Master of Science in Business Analytics (MSBA)</div>
+          <div class="edu-detail">Coursework: Business Analytics, Python Programming, Enterprise Resource Planning</div>
+        </div>
+        <div class="edu-right">
+          <div class="edu-period">In Progress</div>
+          <div class="edu-location">Wichita, KS</div>
+        </div>
+      </div>
+
+      <div class="edu-card">
+        <div>
+          <div class="edu-school">Padmakanya Multiple Campus</div>
+          <div class="edu-degree">Bachelor of Business Administration</div>
+          <div class="edu-detail">CGPA: 3.87 &nbsp;|&nbsp; Rank: 3 / 96</div>
+        </div>
+        <div class="edu-right">
+          <div class="edu-period">2018 – 2023</div>
+          <div class="edu-location">Kathmandu, Nepal</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills">
+  <div class="container">
+    <p class="section-label">Toolkit</p>
+    <h2 class="section-title">Skills</h2>
+    <div class="skills-grid">
+
+      <div class="skill-group">
+        <div class="skill-group-title">Analytics &amp; Tools</div>
+        <div class="skill-pills">
+          <span class="skill-pill">SQL</span>
+          <span class="skill-pill">Python</span>
+          <span class="skill-pill">Tableau</span>
+          <span class="skill-pill">Advanced Excel</span>
+          <span class="skill-pill">XLOOKUP</span>
+          <span class="skill-pill">Pivot Tables</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">Techniques</div>
+        <div class="skill-pills">
+          <span class="skill-pill">Data Analysis</span>
+          <span class="skill-pill">A/B Testing</span>
+          <span class="skill-pill">Market Research</span>
+          <span class="skill-pill">Data Visualization</span>
+          <span class="skill-pill">Reporting</span>
+        </div>
+      </div>
+
+      <div class="skill-group">
+        <div class="skill-group-title">Development</div>
+        <div class="skill-pills">
+          <span class="skill-pill">Python Flask</span>
+          <span class="skill-pill">REST APIs</span>
+          <span class="skill-pill">Data Pipelines</span>
+          <span class="skill-pill">k-Means Clustering</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CERTS -->
+<section id="certs">
+  <div class="container">
+    <p class="section-label">Credentials</p>
+    <h2 class="section-title">Certificates</h2>
+    <div class="certs-grid">
+
+      <div class="cert-card">
+        <div class="cert-icon">🤖</div>
+        <div>
+          <div class="cert-name">AI Agents A-Z</div>
+          <div class="cert-issuer">O'Reilly</div>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-icon">📈</div>
+        <div>
+          <div class="cert-name">Tableau Masterclass</div>
+          <div class="cert-issuer">O'Reilly</div>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-icon">🗄️</div>
+        <div>
+          <div class="cert-name">SQL Window Functions</div>
+          <div class="cert-issuer">LearnSQL.com</div>
+        </div>
+      </div>
+
+      <div class="cert-card">
+        <div class="cert-icon">🔍</div>
+        <div>
+          <div class="cert-name">Google Data Analytics Professional</div>
+          <div class="cert-issuer">Coursera · Google</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="contact-inner">
+      <p class="section-label">Get In Touch</p>
+      <h2 class="section-title" style="margin-bottom:1rem;">Let's Work Together</h2>
+      <p class="contact-tagline">
+        I'm actively looking for internships and full-time roles in data analytics and business intelligence.
+        Feel free to reach out — I'd love to connect.
+      </p>
+      <div class="contact-links">
+        <a href="mailto:yxaryal@shockers.wichita.edu" class="contact-link">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          yxaryal@shockers.wichita.edu
+        </a>
+        <a href="tel:+13167305516" class="contact-link">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.46 2 2 0 0 1 3.58 1.27h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.81a16 16 0 0 0 6.29 6.29l.88-.88a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          +1 (316) 730-5516
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Designed &amp; built by Yojana Aryal &copy; 2026</p>
+</footer>
+
+</body>
+</html>
